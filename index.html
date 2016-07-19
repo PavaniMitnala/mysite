@@ -1,417 +1,65 @@
-
-    <!DOCTYPE html>
-<html class="no-js">
-<head prefix="og: http://ogp.me/ns#">
+<!DOCTYPE html>
+<html lang="en" ng-app="example359" xmlns="http://www.w3.org/1999/xhtml">
+<head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex Badmindton Academy</title>
-    <meta name="title" content="Apex Badmindton Academy" />
-    <meta name="description" content="Centers in Hyderabad open all 7 days." />
+    <meta name="author" content="Script Tutorials" />
+    <title>Responsive website using AngularJS | Script Tutorials</title>
+    <meta name="description" content="Responsive website using AngularJS - demo page">
 
-    <meta property="og:site_name" content="Apex Badmindton Academy" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Apex Badmindton Academy" />
-    <meta property="og:description" content="Centers in Hyderabad open all 7 days." />
-    <meta property="fb:admins" content="767240361" />
-    <meta property="fb:app_id" content="448625568605915" />
-       
-    <!-- Favicons-->
-    <link rel="shortcut icon" href="/Images/AYfavicon.ico" type="image/x-icon" />
-	<link href="stylesheets/specialElite.css" rel="stylesheet" />
-    <link href="stylesheets/Raleway.css" rel="stylesheet" />
-    <link href="stylesheets/portal.css" rel="stylesheet"/>
-    <link href="stylesheets/slider.css" rel="stylesheet" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 
+    <!-- add styles -->
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
 
+    <!-- add javascripts -->
+    <script src="js/jquery-2.0.3.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
 </head>
 <body>
-    
-    <!-- Google Tag Manager -->
-    <noscript>
-        <iframe src="//www.googletagmanager.com/ns.html?id=GTM-53LXMT" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <!-- End Google Tag Manager -->
+    <header>
+        <div class="wrap">
+            <!-- logo -->
+            <a href="#!"><img class="logo" src="images/logo_apex.jpg" /></a>
 
-    <div id="main-wrapper">
-        <header>
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <div id="logo" data-retina="true">
-                        <a href="/" data-url="/"><img src="/Images/August_Yoga_Logo.png" alt="August Yoga" data-retina="true" style="height:50px"></a>
-                        <span style="font-size:xx-large; float:left;position:relative; margin-left:150px; padding-top:20px;" class="lead text-primary">Apex Badminton Academy</span>
-                    </div>
-					
-					<div id="address" data-retina="true">
-                        <span style="font-size:xx-large; float:right;position:relative; margin-right:150px; padding-top:20px;" class="lead text-primary">Apex Badminton Academy</span>
-                    </div>
-
-                </div>
-				
-				<a id="menu-button-mobile" href="javascript:void(0)"><i class="icon-menu"></i></a><!-- Menu button responsive-->
-                    <nav class="menu_container">
-                        <ul class="menu">
-                            <li class="drop-normal">
-                                <a class="drop-down" data-url="/aboutus">Know</a>
-                            </li>
-
-                            <li class="drop-normal">
-                                <a class="drop-down" title="Private Classes, Corporate Classes, Weekend Classes, Yoga at Home">Classes</a>
-                            </li>
-
-                            <li>
-                                <a href="/Asanas">Asanas</a>
-                            </li>
-
-                            <li class="drop-normal">
-                                <a class="drop-down" data-url="/schedule">Schedule</a>
-                            </li>
-
-
-                            <li class="drop-normal">
-                                <a class="drop-down" title="Contact HSR Layout or Electronic City">Contact</a>
-                            </li>
-
-                        </ul>
-
-                    </nav>
-            </div>
-            <div id="header_shadow"></div>
-        </header>
-        <div>
-            
-            
-
-
-
-<div class="row" id="row-main">
-    <div class="col-lg-6 col-md-5" id="main-img-container">
-        <div id="main-img">
-            <div id="main-slider" class="flexslider" style="position:absolute">
-                <ul class="slides">
-                    <li style="background: url(/Images/Mat_Home_Big_Vertical.jpg);"></li>
-                    <li style="background: url(/Images/Hall_HSR.jpg);"></li>
-                    
+            <!-- navigation menu -->
+            <nav>
+                <ul>
+                    <li><a id="workBtn" href="#!/" ng-class="{activeSmall:part == 'projects'}" >Home</a></li>
+                    <li><a id="privacyBtn" href="#!/privacy" ng-class="{activeSmall:part == 'privacy'}">Booking</a></li>
+                    <li><a id="aboutBtn" href="#!/about" ng-class="{activeSmall:part == 'about'}">About us</a></li>
+                    <li style="margin-right:0px"><a id="contactBtn" class="active" href="javascript: void(0)" ng-click="showForm()">Contact Us</a></li>
                 </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- contact us form -->
+    <div class="paddRow contactRow">
+        <div class="wrap">
+            <div class="head">Contact Us</div>
+            <img class="close" src="images/close.png" ng-click="closeForm()" />
+            <form ng-submit="save()" class="contactForm" name="form" ng-hide="loaded">
+                <input class="input" required="required" type="text" name="name" placeholder="your name" ng-model="message.name" />
+                <input class="input email" required="required" type="email" name="email" value="" placeholder="your email" ng-model="message.email" /><br />
+                <textarea class="textarea" rows="5" required="required" placeholder="your message" ng-model="message.text" ></textarea>
+                <button class="btn green">send message</button>
+            </form>
+
+            <!-- contact us form response messages -->
+            <div ng-show="process" style="text-align:center">
+                <img class="loader" src="images/loader.png" />
             </div>
-
-            <div id="calculators_home">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <div class="box_calculator">
-                        <a href="/Free-Yoga-Classes">
-                            <h2 class="margin-top-0">Try Our Free Class</h2>
-                            <h4>Register online for a free trial class and consultation</h4>
-                        </a>
-                    </div><!-- End box-calculator -->
-                </div><!-- End col-md-3 -->
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <div class="box_calculator">
-                        <a href="/Schedule">
-                            <h2 class="margin-top-0">Open 6am - 9pm</h2>
-                            <h4>We are open 15 hours so that you can practice on a daily basis</h4>
-                        </a>
-                    </div><!-- End box-calculator -->
-                </div><!-- End col-md-3 -->
-            </div><!--calculators_home -->
-        </div>
-    </div>
-    <div class="col-lg-6 col-lg-offset-6 col-md-7 col-md-offset-5">
-        <div class="row" id="content-row">
-            <div class="col-md-12">
-                <div class="row alert alert-danger">
-                    <div class="col-md-6 col-sm-6 col-xs-6">
-                        <a href="/Contact">
-                            <span class="text-danger">Avail <span class="h3 text-info"> flat 10% discount</span> on <span class="h3 text-danger">Annual</span> membership.</span>
-                        </a>
-                    </div>
-                    <div class="col-md-6">
-                        <a href="/Contact">
-                            <span class="text-danger h2">we are <span class="h3 text-info"> open all 7 days</span></span>
-                        </a>
-                    </div>
-
-                </div>
-                <div class="row alert alert-info text-center">
-                    <a href="/Weekend-Yoga">
-
-
-                        <div class="h2">Opening shortyly on August 15, 2016!</div>
-                    </a>
-                </div>
-
-
-                <div class="row">
-
-
-                    <div class="col-md-12">
-                        <h1>Why <span class="text-info">Apex Badminton Academy</span></h1>
-                        <p class="lead">
-                            Apex Badminton Academy is established by a group of young professionals who are very passionate about Badminton with the aim of promoting badminton as fitness and fun activity in a club class environment. 
-                        </p>
-                        <p>
-                            The Academy provides world-class facilities with international standard synthetic courts, professional court lighting, and experienced coaches.
-                        </p>
-                        <p>
-                            You can take membership in any of our centers across Hyderabad.
-                        </p>
-                        <hr>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-3 text-center">
-                        <a href="/Team" class="h3">Our Team</a>
-
-                        <div>
-                            <a href="/Team/Vasuda">
-                                <img class="img-thumbnail" src="/Images/VasudaProfile.jpg" alt="Vasuda Team August Yoga" />
-                                <div class="lead">Vasuda</div>
-                            </a>
-                        </div>
-
-                        <div class="">
-                            <a href="/Team/Vidya">
-                                <img class="img-thumbnail" src="/Images/Vidya_thumbnail.jpg" alt="Vidya Team August Yoga" />
-                                <div class="lead">Vidya</div>
-                            </a>
-                        </div>
-
-
-                        <div class="">
-                            <a href="/Team/Jumshid">
-                                <img class="img-thumbnail" src="/Images/Jumshid200_200.png" alt="Jumshid Team August Yoga" />
-                                <div class="lead">Jumshid</div>
-                            </a>
-                        </div>
-
-                    </div>
-                    <div class="col-sm-9 col-lg-8 col-lg-offset-1">
-                        <a href="/Weekend-Yoga-Classes" class="h3">Saturday Special Class</a>
-                        <br />
-                        <br />
-
-    <div class="row form-group">
-        <div class="col-md-12">
-            <time class="date h4 text-primary">
-                02 Jul 2016
-            </time>            
-         <span>-</span>
-Saturday Special Class by Jumshid on &quot;Ashtanga Vinyasa&quot; at HSR Layout from 7:00 am to 8:30 am            
-        </div>
-    </div>
-    <div class="row form-group">
-        <div class="col-md-12">
-            <time class="date h4 text-primary">
-                11 Jun 2016
-            </time>            
-         <span>-</span>
-Saturday Special Class on &quot;Cyclic Meditation&quot; in HSR Layout Center by Vidya at 
-07:00 - 08:00 AM            
-        </div>
-    </div>
-    <div class="row form-group">
-        <div class="col-md-12">
-            <time class="date h4 text-primary">
-                30 Apr 2016
-            </time>            
-         <span>-</span>
-Workshop on &quot;Balancing&quot; by Jeevitha at HSR Layout from 06:30 am to 8:30 am            
-        </div>
-    </div>
-    <div class="row form-group">
-        <div class="col-md-12">
-            <time class="date h4 text-primary">
-                23 Apr 2016
-            </time>            
-         <span>-</span>
-Saturday Special Class by Vidya on &quot;108 Surya Namaskar&quot; at HSR Layout from 7:00 am to 8:00 am            
+            <div ng-show="success"><p>Your message has been sent, thank you.</p></div>
         </div>
     </div>
 
-
-
-
-                    </div>
-                </div>
-
-
-                <div class="row text-center">
-                    <h2>Testimonials</h2>
-                    <div class="col-md-12">
-                        <div class="box_style_1" style="padding-bottom:10px!important;">
-                            <div id="reviews-slider" class="flex-slider" style="position:relative;">
-                                <ul class="slides">
-                                    <li>
-                                        <br />
-                                        <a href="/Reviews">
-                                            <img src="/Images/user.jpg" alt="Gayathri & Arvind Review" class="img-circle styled">
-                                        </a>
-                                        <h4>Gayathri & Arvind</h4>
-                                        <a href="/Reviews">
-                                            <p>After joining August Yoga, we had fallen in love with yoga. We both felt healthier and are grateful to our guru for her patience and diligence.</p>
-                                            <p>Thank you, August Yoga for the authentic experience!</p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <br />
-                                        <a href="/Reviews">
-                                            <img src="/Images/user.jpg" alt="Diana Ramjeet Review" class="img-circle styled">
-                                        </a>
-                                        <h4>Diana Ramjeet</h4>
-                                        <a href="/Reviews">I am a Canadian resident who vacationed in Bangalore for one week. I wanted to practice yoga while in India and, after researching a few places, I came across August Yoga. I had a million questions as it was my first time in India and the team at August was always very quick to respond and more than willing to offer their support. </a>
-                                    </li>
-                                    <li>
-                                        <br />
-                                        <a href="/Reviews">
-                                            <img src="/Images/Vasupradha.jpg" alt="Vasupradha Review" class="img-circle styled">
-                                        </a>
-                                        <h4>Vasupradha</h4>
-                                        <a href="/Reviews">Have had prior experience in traditional Yoga. My Yoga teacher left for an ashram. Hence, I was in search of a new place to practice asanas. But for over a year, having attended over 8-10 trial classes in different places, nothing was anywhere near to acceptable. Then, after a long and arduous search in areas around HSR, I found August Yoga. As they say, when you really want something to happen, the whole world conspires to help you achieve it!</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <br />
-                        </div>
-                    </div>
-
-                </div>
-            </div><!-- End row -->
-            
-<footer>
-    <div class="row">
-        <div class="col-sm-3">
-            <ul id="contact_follow">
-                <li><a href="https://www.facebook.com/YogaAugust" title="Check our Profile" target="new_"><span class="icon-facebook"></span></a></li>
-            </ul>
-        </div>
-        <div class="col-sm-6">
-            <div class="text-primary" style="font-size:xx-large">9742369684</div>
-            <a href="mailto:contact@augustyoga.com" class="h4" target="_blank" style="margin-top:0px;">contact@augustyoga.com</a>
-        </div>
-        <div class="col-sm-3">
-            <ul id="contact_follow">
-                <li><a href="https://twitter.com/AugustYoga" title="Tweet This Page" target="new_"><span class=" icon-twitter"></span></a></li>
-            </ul>
-        </div>
+    <!-- main content -->
+    <div style="position:relative">
+        <div style="width:100%" ng-view ng-animate="{enter: 'view-enter', leave: 'view-leave'}"></div>
     </div>
-    <form id="divmail" role="form">
-        <div class="row">
-            <div class="col-md-3">
-                <label class="h4">Join our newsletter</label>
-            </div>
-            <div class="col-md-6">
-                <input placeholder="email" type="email" class="form-control" id="email" name="email" required />
-            </div>
-            <div class="col-md-3">
-                <button type="button" id="joinSubmit" class="btn btn-default">Subscribe</button>
-            </div>
-        </div>
-    </form>
-    <div class="row">
-        <div class="lead h4">Branches</div>
-        <div>
-            <span class="alert-warning well-sm h4"><a href="/Classes-in-HSR-Layout">HSR Layout</a></span>
-            <span class="well-sm alert-warning h4"><a href="/Classes-in-Electronic-City">Electronic City</a></span>            
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div>
-                <a href="http://www.mondaz.com" target="_blank" title="Development & SEO by Monday" rel="nofollow"><img src="/Images/Monday.png" alt="Web Development & SEO by Monday" style="vertical-align:middle" /></a>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="fb-share-button" data-href="http://www.augustyoga.com" data-type="button"></div>
-            <div class="fb-like" data-href="https://www.facebook.com/YogaAugust" data-layout="button_count" data-action="like"></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div itemprop="mainEntity" itemscope="" itemtype="http://schema.org/WebPage">
-                <div itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating" class="ratingBlock ratingBlock2">
-                    <p class="pull-left">
-                        <span style="float:left;">Average Rating</span>
-                        <span itemprop="ratingValue" style="display:none">4.8</span>
-                        
-                    </p>
-                    <div class="rating_bar">
-                        <div class="rating" style="width:100.0%;">
-                        </div>
-                    </div>
-                    <p style="position: absolute;min-width: 164px;max-width: 100px;top:3px;">
-                        (<span itemprop="reviewCount">5</span>)
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer><!-- End footer -->
-
-        </div><!-- End col-md-12 -->
-    </div><!-- End content-row -->
-</div><!-- End col-lg-6-->
-
-        </div>
-    </div>
-
-    <script src="/bundles/jquery?v=t9hMHqg3VdwwsAiKF0Rqp-CBKnwGNHVAJDS19ik44Dw1"></script>
-
-
-    <script src="/bundles/Project/JS?v=fOlsnv0HDCy_ehjADr24-KWH5xz7MlnvFUkPLvWjOFY1"></script>
-
-
-    
-
-
-    <script type="text/javascript">
-
-        $(window).load(function () {
-
-            var curSlide;
-
-
-
-            $('#main-slider').flexslider({
-                animation: "slide",
-            });
-
-            $('.flex-slider').flexslider({
-                animation: "slide",
-                controlNav: true,
-                after: function (slider) {
-                    window.curSlide = $('.flexslider > .flex-control-nav').find("li > a.flex-active").text();
-                    if (window.curSlide == "3") {
-                        $("#calculators_home").hide();
-                    } else {
-                        $("#calculators_home").show();
-                    }
-                }
-            });
-
-            $('.flex-control-nav').on('click', function (e) {
-                if ($(this).find("li > a.flex-active").text() == "3") {
-                    $("#calculators_home").hide();
-                } else {
-                    $("#calculators_home").show();
-                }
-            });
-
-        });
-
-
-
-
-
-
-    </script>
-
-
-
-    
-
 
 </body>
 </html>
